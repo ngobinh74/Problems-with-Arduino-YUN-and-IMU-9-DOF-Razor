@@ -1,0 +1,43 @@
+Dear all my colleagues and friends,
+And, to whom it may concern
+
+Firstly, I want to say IMU 9 DOF Razor with default program (razor-9dof-ahrs) can work well with Arduino UNO and thank you very much for your help.
+
+I do some works with Arduino YUN, like collecting data from IMU 9 DOF Razor, processing and transmitting them by Wifi... When developing my code for Arduino YUN, I have problems with it and IMU 9 DOF Razor. Please give me your suggestions to solve 2 problems below:
+
+1. Not like Arduino UNO, Arduino YUN gave out Zero numbers when I used default calibration program (with a little change). Because I think when we use IMU 9 DOF Razor module with one platform, we have to calibrate it with that platform. If not, the factory should give us default Max-min data for each IMU sensor to apply for every platform. Is it true? 
+
+When calibrating IMU 9 DOF Razor, I improve the razor-9dof-ahrs program (https://github.com/ptrbrtz/razor-9dof-ahrs) by use Bridge to change the way to transmit data from using COM to Wifi, and put default Max-min data numbers for it:
+
+// Put MIN/MAX and OFFSET readings for your board here!
+// Accelerometer
+// "accel x,y,z (min/max) = X_MIN/X_MAX  Y_MIN/Y_MAX  Z_MIN/Z_MAX"
+#define ACCEL_X_MIN ((float) -250)
+#define ACCEL_X_MAX ((float) 250)
+#define ACCEL_Y_MIN ((float) -250)
+#define ACCEL_Y_MAX ((float) 250)
+#define ACCEL_Z_MIN ((float) -250)
+#define ACCEL_Z_MAX ((float) 250)
+
+// Magnetometer (standard calibration) - Default numbers
+// "magn x,y,z (min/max) = X_MIN/X_MAX  Y_MIN/Y_MAX  Z_MIN/Z_MAX"
+#define MAGN_X_MIN ((float) -600)
+#define MAGN_X_MAX ((float) 600)
+#define MAGN_Y_MIN ((float) -600)
+#define MAGN_Y_MAX ((float) 600)
+#define MAGN_Z_MIN ((float) -600)
+#define MAGN_Z_MAX ((float) 600)
+
+// Gyroscope
+// "gyro x,y,z (current/average) = .../OFFSET_X  .../OFFSET_Y  .../OFFSET_Z
+#define GYRO_AVERAGE_OFFSET_X ((float) 0.0)
+#define GYRO_AVERAGE_OFFSET_Y ((float) 0.0)
+#define GYRO_AVERAGE_OFFSET_Z ((float) 0.0)
+
+I receive results = 0 for all. Even with that numbers, Arduino UNO can work normally.
+
+I tried to calibrate IMU 9 DOF Razor by Arduino UNO and have corrected number with Arduino UNO. I mean IMU can work well with Arduino UNO. But when I did copy that numbers and program to Arduino YUN, Arduino YUN runs out of rank after some minutes. 
+
+2. When collecting data from IMU 9 DOF Razor by YUN via Wi-Fi, I have full data: Y, P, R, Ax, Ay, Az; Mx, My, Mz, Gx, Gy, Gz. But after some minutes, data run out of ranks (non – not a number). How can I correct that fault?
+
+Thank you very much for taking time to read and comment! 
